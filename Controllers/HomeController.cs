@@ -18,9 +18,16 @@ namespace iTunes_WebApp_API.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        // GET: Home/GoToiTunesStore
+        public IActionResult GoToiTunesStore()
         {
-            return View();
+            return RedirectToAction("Index", "iTunes");
+        }
+
+        // GET: Home/SignIn
+        public IActionResult SignIn()
+        {
+            return RedirectToAction("SignIn", "Authentication");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -29,4 +36,5 @@ namespace iTunes_WebApp_API.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
 }

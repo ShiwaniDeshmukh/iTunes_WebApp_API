@@ -19,8 +19,8 @@ namespace iTunes_WebApp_API.Controllers
             _context = context;
         }
 
-        // GET api/musicvideos
-        [HttpGet]
+        // GET api/musicvideos/all
+        [HttpGet("all")]
         public async Task<IActionResult> Get()
         {
             List<MusicVideos> musicVideos = await _context.MusicVideos.ToListAsync();
@@ -36,6 +36,17 @@ namespace iTunes_WebApp_API.Controllers
                 return NotFound();
 
             return Ok(musicVideo);
+        }
+
+        // GET api/musicvideos/search/{keyword}
+        [HttpGet("search/{keyword}")]
+        public async Task<IActionResult> Search(string keyword)
+        {
+            List<MusicVideos> searchResults = await _context.MusicVideos
+                .Where(mv => mv.Title.Contains(keyword) || mv.Artist.Contains(keyword))
+                .ToListAsync();
+
+            return Ok(searchResults);
         }
 
         // POST api/musicvideos
@@ -56,10 +67,10 @@ namespace iTunes_WebApp_API.Controllers
             if (musicVideo == null)
                 return NotFound();
 
-            musicVideo.CoverImage = updatedmusicVideo.CoverImage;
+            musicVideo.CoverImage = updatedMusicVideo.CoverImage;
             musicVideo.Title = updatedMusicVideo.Title;
             musicVideo.Artist = updatedMusicVideo.Artist;
-            musicVideo.ReleaseYear = updatedMusicVideo.ReleaseYear;
+            musicVideo.Duration = updatedMusicVideo.Duration;
             musicVideo.Price = updatedMusicVideo.Price;
 
             await _context.SaveChangesAsync();
@@ -71,7 +82,7 @@ namespace iTunes_WebApp_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            MusicVideo musicVideo = await _context.MusicVideos.FindAsync(id);
+            MusicVideos musicVideo = await _context.MusicVideos.FindAsync(id);
             if (musicVideo == null)
                 return NotFound();
 

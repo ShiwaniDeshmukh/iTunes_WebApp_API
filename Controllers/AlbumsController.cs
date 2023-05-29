@@ -19,15 +19,15 @@ namespace iTunes_WebApp_API.Controllers
             _context = context;
         }
 
-        // GET -  retrieves all albums from the database
-        [HttpGet]
+        // GET 
+        [HttpGet("all")]
         public async Task<IActionResult> Get()
         {
             List<Albums> albums = await _context.Albums.ToListAsync();
             return Ok(albums);
         }
 
-        // GET - retrieves a specific album from the database based on the provided id
+        // GET 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -38,7 +38,18 @@ namespace iTunes_WebApp_API.Controllers
             return Ok(album);
         }
 
-        // POST -  receives an Album object from the request body ([FromBody] Album album).
+        // GET 
+        [HttpGet("search/{keyword}")]
+        public async Task<IActionResult> Search(string keyword)
+        {
+            List<Albums> searchResults = await _context.Albums
+                .Where(album => album.Title.Contains(keyword) || album.Artist.Contains(keyword))
+                .ToListAsync();
+
+            return Ok(searchResults);
+        }
+
+        // POST 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Albums album)
         {
@@ -48,7 +59,7 @@ namespace iTunes_WebApp_API.Controllers
             return CreatedAtAction(nameof(Get), new { id = album.AlbumId }, album);
         }
 
-        // PUT - updates an existing album in the database
+        // PUT 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Albums updatedAlbum)
         {
@@ -67,7 +78,7 @@ namespace iTunes_WebApp_API.Controllers
             return NoContent();
         }
 
-        // DELETE - deletes an existing album from the database
+        // DELETE 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
