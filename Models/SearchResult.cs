@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace iTunes_WebApp_API.Models
 {
@@ -64,6 +65,8 @@ namespace iTunes_WebApp_API.Models
         [JsonProperty("releaseDate")]
         public DateTime? ReleaseDate { get; set; }
 
+        public string ViewDetailsUrl { get; set; }
+
         // Additional properties for displaying the search results
         public string Heading { get; set; }  // Heading for grouping results (e.g., Songs, Albums, etc.)
 
@@ -71,16 +74,26 @@ namespace iTunes_WebApp_API.Models
         public string GetFormattedTrackPrice()
         {
             if (TrackPrice.HasValue)
-                return TrackPrice.Value.ToString("C");  // Format the price as currency
+            {
+                CultureInfo culture = new CultureInfo("en-US");
+                return TrackPrice.Value.ToString("C", culture);  // Format the price as currency in dollars
+            }
             else
+            {
                 return "N/A";
+            }
         }
         public string GetFormattedCollectionPrice()
         {
             if (CollectionPrice.HasValue)
-                return CollectionPrice.Value.ToString("C");  // Format the price as currency
+            {
+                CultureInfo culture = new CultureInfo("en-US");
+                return CollectionPrice.Value.ToString("C", culture);  // Format the price as currency in dollars
+            }
             else
+            {
                 return "N/A";
+            }
         }
     }
 }

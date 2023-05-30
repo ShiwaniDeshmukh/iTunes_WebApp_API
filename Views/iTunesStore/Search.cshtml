@@ -15,11 +15,14 @@
             if (item.WrapperType == "track" && item.Kind == "song")
             {
                 <li>
-                    <img src="@item.ArtworkUrl100" alt="Album Artwork">
-                    <h3>@item.TrackName</h3>
-                    <p>Artist: @item.ArtistName</p>
-                    <p>Price: @item.GetFormattedTrackPrice()</p>
-                    <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                    <a href="@item.ViewDetailsUrl">
+                        <img src="@item.ArtworkUrl100" alt="Album Artwork">
+                        <h3>@item.TrackName</h3>
+                        <p>Artist: @item.ArtistName</p>
+                        <p>Album: @item.CollectionName</p>
+                        <p>Price: @item.GetFormattedTrackPrice()</p>
+                        <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                    </a>
                 </li>
             }
         }
@@ -32,11 +35,13 @@
             if (item.WrapperType == "collection" && item.Kind == "album")
             {
                 <li>
-                    <img src="@item.ArtworkUrl100" alt="Album Artwork">
-                    <h3>@item.CollectionName</h3>
-                    <p>Artist: @item.ArtistName</p>
-                    <p>Price: @item.GetFormattedCollectionPrice()</p>
-                    <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                    <a href="@item.ViewDetailsUrl">
+                        <img src="@item.ArtworkUrl100" alt="Album Artwork">
+                        <h3>@item.CollectionName</h3>
+                        <p>Artist: @item.ArtistName</p>
+                        <p>Price: @item.GetFormattedCollectionPrice()</p>
+                        <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                    </a>
                 </li>
             }
         }
@@ -46,14 +51,17 @@
     <ul>
         @foreach (var item in Model.Results)
         {
-            if (item.WrapperType == "track" && item.Kind == "music-video")
+            if (item.WrapperType == "track" && item.Kind == "song")
             {
                 <li>
-                    <img src="@item.ArtworkUrl100" alt="Video Thumbnail">
-                    <h3>@item.TrackName</h3>
-                    <p>Artist: @item.ArtistName</p>
-                    <p>Price: @item.GetFormattedTrackPrice()</p>
-                    <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                    <a href="@item.ViewDetailsUrl">
+                        <img src="@item.ArtworkUrl100" alt="Album Artwork">
+                        <h3>@item.TrackName</h3>
+                        <p>Artist: @item.ArtistName</p>
+                        <p>Album: @item.CollectionName</p>
+                        <p>Price: @item.GetFormattedTrackPrice()</p>
+                        <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                    </a>
                 </li>
             }
         }
@@ -63,14 +71,17 @@
     <ul>
         @foreach (var item in Model.Results)
         {
-            if (item.WrapperType == "track" && item.Kind == "tv-episode")
+            if (item.WrapperType == "track" && item.Kind == "song")
             {
                 <li>
-                    <img src="@item.ArtworkUrl100" alt="Episode Thumbnail">
-                    <h3>@item.TrackName</h3>
-                    <p>Artist: @item.ArtistName</p>
-                    <p>Price: @item.GetFormattedTrackPrice()</p>
-                    <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                    <a href="@item.ViewDetailsUrl">
+                        <img src="@item.ArtworkUrl100" alt="Album Artwork">
+                        <h3>@item.TrackName</h3>
+                        <p>Artist: @item.ArtistName</p>
+                        <p>Album: @item.CollectionName</p>
+                        <p>Price: @item.GetFormattedTrackPrice()</p>
+                        <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                    </a>
                 </li>
             }
         }

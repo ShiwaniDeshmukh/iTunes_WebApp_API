@@ -35,5 +35,26 @@ namespace iTunes_WebApp_API.Controllers
                 return StatusCode((int)response.StatusCode);
             }
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Details(int id)
+        {
+            var httpClient = _clientFactory.CreateClient();
+            var response = await httpClient.GetAsync($"https://itunes.apple.com/lookup?id={id}&entity=song");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var songsResponse = JsonConvert.DeserializeObject<SongsResponse>(json);
+
+                if (songsResponse?.Results?.Count > 0)
+                {
+                    var song = songsResponse.Results[0];
+                    return View(song);
+                }
+            }
+
+            return NotFound();
+        }
     }
 }

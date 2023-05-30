@@ -54,6 +54,26 @@ namespace iTunes_WebApp_API.Controllers
                 // Deserialize the JSON response into a SearchResult object
                 SearchResult searchResult = JsonConvert.DeserializeObject<SearchResult>(json);
 
+                // Generate the details URL for each search item
+                foreach (var item in searchResult.Results)
+                {
+                    switch (item.Kind)
+                    {
+                        case "song":
+                            item.ViewDetailsUrl = Url.Action("Details", "Songs", new { id = item.TrackId });
+                            break;
+                        case "album":
+                            item.ViewDetailsUrl = Url.Action("Details", "Albums", new { id = item.CollectionId });
+                            break;
+                        case "music-video":
+                            item.ViewDetailsUrl = Url.Action("Details", "MusicVideos", new { id = item.VideoId });
+                            break;
+                        case "tv-episode":
+                            item.ViewDetailsUrl = Url.Action("Details", "TVEpisodes", new { id = item.EpisodeId });
+                            break;
+                    }
+                }
+
                 return View("Search", searchResult);
             }
             catch (Exception ex)
