@@ -14,5 +14,79 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 100px;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.laptop-image {
+    float: right;
+    width: 100%;
+    max-width: 750px;
+    margin-top: 30px;
+    margin-right: -130px;
+}
+
+.apple-logo {
+    display: block;
+    margin: 0 auto;
+    width: 4.5%;
+    margin-top: -610px;
+}
+
+.heading {
+    font-size: 48px;
+    margin-top: -400px;
+    text-align: left;
+    margin-left: -40px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.subheading {
+    font-size: 18px;
+    text-align: left;
+    margin-left: -35px;
+    margin-bottom: 30px;
+    color: black;
+    font-family: 'Times New Roman', Times, serif
+}
+
+.btn-go-to-itunes {
+    margin-top: -450px;
+    text-align: left;
+    margin-left: -35px;
+    padding: 12px 24px;
+    font-size: 17.5px;
+    background-color: dodgerblue;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.btn-sign-in {
+    margin-top: -370px;
+    text-align: left;
+    margin-left: -35px;
+    padding: 12px 24px;
+    font-size: 17.5px;
+    background-color: dodgerblue;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+    .btn-go-to-itunes:hover,
+    .btn-sign-in:hover {
+        background-color: #0056b3;
+    }
+
+}
+}
 }
