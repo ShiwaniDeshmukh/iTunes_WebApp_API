@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using System;
 using System.Net.Http;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 using iTunes_WebApp_API.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace iTunes_WebApp_API.Controllers
 {
@@ -17,40 +18,50 @@ namespace iTunes_WebApp_API.Controllers
 
         public IActionResult Index()
         {
-            // Implement the action method for displaying the iTunes store page here
-            return View();
+            return View("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Search(string keyword)
+        public async Task<IActionResult> Search(string term)
         {
-            if (string.IsNullOrEmpty(keyword))
+            if (string.IsNullOrEmpty(term))
+                return View("Index");
+
+            // Encode the search term for the URL
+            string encodedTerm = Uri.EscapeDataString(term);
+
+            // Create the HTTP client
+            HttpClient client = _httpClientFactory.CreateClient();
+
+            // Build the API URL
+            string apiUrl = $"https://itunes.apple.com/search?term={encodedTerm}";
+
+            try
             {
-                return RedirectToAction("Index");
+                // Send the API request and retrieve the response
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+                response.EnsureSuccessStatusCode();
+
+                // Read the response content
+                string json = await response.Content.ReadAsStringAsync();
+
+                // Validate the JSON structure
+                if (!SearchResult.ValidateJsonStructure(json))
+                {
+                    ViewBag.Error = "Invalid JSON structure returned from the iTunes API.";
+                    return View("Index");
+                }
+
+                // Deserialize the JSON response into a SearchResult object
+                SearchResult searchResult = JsonConvert.DeserializeObject<SearchResult>(json);
+
+                return View("Search", searchResult);
             }
-
-            // Implement the action method for handling search requests and retrieving search results
-
-            // Construct the search API URL by appending the keyword to the base URL
-            string apiUrl = "https://itunes.apple.com/search?term=" + keyword;
-
-            // Use HttpClient to send an HTTP GET request to the search API
-            var httpClient = _httpClientFactory.CreateClient();
-            var response = await httpClient.GetAsync(apiUrl);
-
-            if (response.IsSuccessStatusCode)
+            catch (Exception ex)
             {
-                // Parse the API response and deserialize it into a SearchResult object
-                string jsonResponse = await response.Content.ReadAsStringAsync();
-                var searchResult = JsonConvert.DeserializeObject<SearchResult>(jsonResponse);
-
-                // Pass the search result to the view for display
-                return View("SearchResult", searchResult);
-            }
-            else
-            {
-                // Handle the case when the API request fails
-                return View("Error");
+                // Handle any errors that occurred during the API request
+                ViewBag.Error = "An error occurred while retrieving the search results.";
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Index");
             }
         }
     }

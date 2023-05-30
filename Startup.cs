@@ -46,9 +46,9 @@ namespace iTunes_WebApp_API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name: "itunes",
-                pattern: "iTunesStore",
-                defaults: new { controller = "iTunesStore", action = "Index" });
+                    name: "itunes",
+                    pattern: "itunes/{action=Index}/{id?}",
+                    defaults: new { controller = "iTunes" });
 
                 endpoints.MapControllerRoute(
                     name: "default",

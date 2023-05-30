@@ -1,0 +1,82 @@
+﻿@model iTunes_WebApp_API.Models.SearchResult
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h1>Search Results</h1>
+
+@if (Model.ResultCount > 0)
+{
+    <h2>Songs</h2>
+    <ul>
+        @foreach (var item in Model.Results)
+        {
+            if (item.WrapperType == "track" && item.Kind == "song")
+            {
+                <li>
+                    <img src="@item.ArtworkUrl100" alt="Album Artwork">
+                    <h3>@item.TrackName</h3>
+                    <p>Artist: @item.ArtistName</p>
+                    <p>Price: @item.GetFormattedPrice()</p>
+                    <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                </li>
+            }
+        }
+    </ul>
+
+    <h2>Albums</h2>
+    <ul>
+        @foreach (var item in Model.Results)
+        {
+            if (item.WrapperType == "collection" && item.Kind == "album")
+            {
+                <li>
+                    <img src="@item.ArtworkUrl100" alt="Album Artwork">
+                    <h3>@item.CollectionName</h3>
+                    <p>Artist: @item.ArtistName</p>
+                    <p>Price: @item.GetFormattedPrice()</p>
+                    <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                </li>
+            }
+        }
+    </ul>
+
+    <h2>Music Videos</h2>
+    <ul>
+        @foreach (var item in Model.Results)
+        {
+            if (item.WrapperType == "track" && item.Kind == "music-video")
+            {
+                <li>
+                    <img src="@item.ArtworkUrl100" alt="Video Thumbnail">
+                    <h3>@item.TrackName</h3>
+                    <p>Artist: @item.ArtistName</p>
+                    <p>Price: @item.GetFormattedPrice()</p>
+                    <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                </li>
+            }
+        }
+    </ul>
+
+    <h2>TV Episodes</h2>
+    <ul>
+        @foreach (var item in Model.Results)
+        {
+            if (item.WrapperType == "track" && item.Kind == "tv-episode")
+            {
+                <li>
+                    <img src="@item.ArtworkUrl100" alt="Episode Thumbnail">
+                    <h3>@item.TrackName</h3>
+                    <p>Artist: @item.ArtistName</p>
+                    <p>Price: @item.GetFormattedPrice()</p>
+                    <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
+                </li>
+            }
+        }
+    </ul>
+}
+else
+{
+    <p>No results found.</p>
+}

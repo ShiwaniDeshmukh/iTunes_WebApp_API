@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "iTunes Store";
+}
+
+<h1>iTunes Store</h1>
+
+<form method="get" action="/iTunesStore/Search">
+    <label for="searchTerm">Search:</label>
+    <input type="text" id="searchTerm" name="term" required>
+    <button type="submit">Search</button>
+</form>

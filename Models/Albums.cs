@@ -6,15 +6,12 @@ namespace iTunes_WebApp_API.Models
 {
     public class Albums
     {
-        public string WrapperType { get; set; }
-        public string Kind { get; set; }
-        public string ArtistName { get; set; }
-        public string CollectionName { get; set; }
-        public string ArtworkUrl100 { get; set; }
-        public decimal? CollectionPrice { get; set; }
-        public DateTime? ReleaseDate { get; set; }
-
-        // Relationships
-        public List<Songs> Songs { get; set; } // Relationship: Album can have multiple songs
+        public string wrapperType { get; set; }
+        public string kind { get; set; }
+        public string artistName { get; set; }
+        public string collectionName { get; set; }
+        public string artworkUrl100 { get; set; }
+        public decimal? collectionPrice { get; set; }
+        public DateTime? releaseDate { get; set; }
     }
 }
