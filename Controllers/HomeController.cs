@@ -15,14 +15,16 @@ namespace iTunes_WebApp_API.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         // GET: Home/GoToiTunesStore
         public IActionResult GoToiTunesStore()
         {
-            return RedirectToAction("Index", "iTunes");
+            return RedirectToAction("Index", "iTunesStore");
         }
+
+
 
         // GET: Home/SignIn
         public IActionResult SignIn()

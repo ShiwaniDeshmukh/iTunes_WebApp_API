@@ -18,7 +18,7 @@
                     <img src="@item.ArtworkUrl100" alt="Album Artwork">
                     <h3>@item.TrackName</h3>
                     <p>Artist: @item.ArtistName</p>
-                    <p>Price: @item.GetFormattedPrice()</p>
+                    <p>Price: @item.GetFormattedTrackPrice()</p>
                     <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
                 </li>
             }
@@ -35,7 +35,7 @@
                     <img src="@item.ArtworkUrl100" alt="Album Artwork">
                     <h3>@item.CollectionName</h3>
                     <p>Artist: @item.ArtistName</p>
-                    <p>Price: @item.GetFormattedPrice()</p>
+                    <p>Price: @item.GetFormattedCollectionPrice()</p>
                     <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
                 </li>
             }
@@ -52,7 +52,7 @@
                     <img src="@item.ArtworkUrl100" alt="Video Thumbnail">
                     <h3>@item.TrackName</h3>
                     <p>Artist: @item.ArtistName</p>
-                    <p>Price: @item.GetFormattedPrice()</p>
+                    <p>Price: @item.GetFormattedTrackPrice()</p>
                     <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
                 </li>
             }
@@ -69,7 +69,7 @@
                     <img src="@item.ArtworkUrl100" alt="Episode Thumbnail">
                     <h3>@item.TrackName</h3>
                     <p>Artist: @item.ArtistName</p>
-                    <p>Price: @item.GetFormattedPrice()</p>
+                    <p>Price: @item.GetFormattedTrackPrice()</p>
                     <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
                 </li>
             }

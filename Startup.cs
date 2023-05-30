@@ -47,13 +47,14 @@ namespace iTunes_WebApp_API
             {
                 endpoints.MapControllerRoute(
                     name: "itunes",
-                    pattern: "itunes/{action=Index}/{id?}",
-                    defaults: new { controller = "iTunes" });
+                    pattern: "iTunes/{action=Index}/{id?}",
+                    defaults: new { controller = "iTunesStore" });
 
                 endpoints.MapControllerRoute(
-                    name: "default",
+                    name: "home",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
 
         }
     }
