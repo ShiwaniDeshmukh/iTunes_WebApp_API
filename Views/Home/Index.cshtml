@@ -26,19 +26,17 @@
                 <h1 class="heading">Welcome to iTunes</h1>
                 <p class="subheading">Discover and purchase your favorite Music, Albums, and Music Videos.</p>
             </div>
-
-
-            <div class="row justify-content-left">
-                <div class="col-md-6 text-left">
-                    <a href="@Url.Action("Index", "iTunes")" class="btn btn-primary btn-lg btn-block btn-go-to-itunes">Go to iTunes Store</a>
-                </div>
-            </div>
-            <div class="row justify-content-left">
-                <div class="col-md-6 text-left">
-                    <a href="@Url.Action("SignIn", "Authentication")" class="btn btn-primary btn-lg btn-block btn-sign-in">Sign in to iTunes Store</a>
-                </div>
-            </div>
-
         </div>
+        <div class="row justify-content-left">
+            <div class="col-md-6 text-left">
+                <a href="@Url.Action("Index", "iTunesStore")" class="btn btn-primary btn-lg btn-block btn-go-to-itunes">Go to iTunes Store</a>
+            </div>
+        </div>
+        <div class="row justify-content-left">
+            <div class="col-md-6 text-left">
+                <a href="@Url.Action("SignIn", "Authentication")" class="btn btn-primary btn-lg btn-block btn-sign-in">Sign in to iTunes Store</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

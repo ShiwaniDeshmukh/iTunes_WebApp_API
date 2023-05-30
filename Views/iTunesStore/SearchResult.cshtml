@@ -1,0 +1,27 @@
+﻿<!-- Albums -->
+<h2>Albums</h2>
+@foreach (var album in Model.Albums)
+{
+    <p>@album.ArtistName - @album.CollectionName</p>
+}
+
+<!-- Songs -->
+<h2>Songs</h2>
+@foreach (var song in Model.Songs)
+{
+    <p>@song.ArtistName - @song.TrackName</p>
+}
+
+<!-- Music Videos -->
+<h2>Music Videos</h2>
+@foreach (var video in Model.MusicVideos)
+{
+    <p>@video.ArtistName - @video.TrackName</p>
+}
+
+<!-- TV Episodes -->
+<h2>TV Episodes</h2>
+@foreach (var episode in Model.TVEpisodes)
+{
+    <p>@episode.ArtistName - @episode.TrackName</p>
+}

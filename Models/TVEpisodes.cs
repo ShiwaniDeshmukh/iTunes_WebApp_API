@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace iTunes_WebApp_API.Models
 {
-    public class Songs
+    public class TVEpisodes
     {
         public string WrapperType { get; set; }
         public string Kind { get; set; }
@@ -15,7 +15,5 @@ namespace iTunes_WebApp_API.Models
         public decimal? TrackPrice { get; set; }
         public DateTime? ReleaseDate { get; set; }
 
-        // Relationships
-        public Albums Album { get; set; } // Relationship: Song belongs to an Album
     }
 }

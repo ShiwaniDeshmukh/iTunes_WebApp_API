@@ -26,7 +26,7 @@ namespace iTunes_WebApp_API.Controllers
         {
             if (string.IsNullOrEmpty(keyword))
             {
-                return View("Index");
+                return RedirectToAction("Index");
             }
 
             // Implement the action method for handling search requests and retrieving search results
@@ -55,4 +55,3 @@ namespace iTunes_WebApp_API.Controllers
         }
     }
 }
-

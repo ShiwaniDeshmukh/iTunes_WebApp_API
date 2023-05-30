@@ -22,6 +22,8 @@ namespace iTunes_WebApp_API
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
+            services.AddControllers();
+            services.AddHttpClient();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,9 +46,15 @@ namespace iTunes_WebApp_API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                name: "itunes",
+                pattern: "iTunesStore",
+                defaults: new { controller = "iTunesStore", action = "Index" });
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }
