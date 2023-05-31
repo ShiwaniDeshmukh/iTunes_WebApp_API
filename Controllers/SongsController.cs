@@ -28,6 +28,13 @@ namespace iTunes_WebApp_API.Controllers
             {
                 var json = await response.Content.ReadAsStringAsync();
                 var songsResponse = JsonConvert.DeserializeObject<SongsResponse>(json);
+
+                // Generate the details URL for each search item
+                foreach (var song in songsResponse.Results)
+                {
+                    song.ViewDetailsUrl = Url.Action("Details", new { id = song.trackId });
+                }
+
                 return Ok(songsResponse);
             }
             else
@@ -50,7 +57,7 @@ namespace iTunes_WebApp_API.Controllers
                 if (songsResponse?.Results?.Count > 0)
                 {
                     var song = songsResponse.Results[0];
-                    return View(song);
+                   // return View(song);
                 }
             }
 

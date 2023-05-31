@@ -2,10 +2,126 @@
     ViewData["Title"] = "iTunes Store";
 }
 
-<h1>iTunes Store</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: black; /* Set the background color to black */
+            color: white; /* Set the text color to white */
+        }
 
-<form method="get" action="/iTunesStore/Search">
-    <label for="searchTerm">Search:</label>
-    <input type="text" id="searchTerm" name="term" required>
-    <button type="submit">Search</button>
-</form>
+        h1 {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 10px;
+            position: absolute;
+            top: 90px;
+            left: 50px;
+        }
+
+        .banner-container-left,
+        .banner-container-right {
+            position: absolute;
+            width: 50%;
+            height: 600px;
+            overflow: hidden;
+            top: 150px;
+            z-index: 0;
+        }
+
+        .banner-container-left {
+            left: 0;
+        }
+
+        .banner-container-right {
+            right: 0;
+        }
+
+        .banner-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+            .banner-image.visible {
+                opacity: 1;
+            }
+
+        .search-container {
+            position: absolute;
+            top: 100px;
+            right: 50px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="font-weight: bold">iTunes Store</h1>
+
+    <div class="banner-container banner-container-left">
+        @for (int i = 1; i <= 15; i++)
+        {
+            <img class="banner-image @(i == 1 ? "visible" : "")" src="~/images/banner@(i).jpg" alt="Banner @(i)">
+        }
+    </div>
+
+    <div class="banner-container banner-container-right">
+        @for (int i = 1; i <= 15; i++)
+        {
+            <img class="banner-image @(i == 16 ? "visible" : "")" src="~/images/banner@(i).jpg" alt="Banner @(i)">
+        }
+    </div>
+
+    <div class="search-container">
+        <form method="get" action="/iTunesStore/Search">
+            <div class="input-group">
+                <input type="text" id="searchTerm" class="form-control" name="term" placeholder="Search" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var imagesLeft = $(".banner-container-left .banner-image");
+            var imagesRight = $(".banner-container-right .banner-image");
+            var currentImageIndexLeft = 0;
+            var currentImageIndexRight = 0;
+
+            function showNextImageLeft() {
+                imagesLeft.removeClass("visible");
+                $(imagesLeft[currentImageIndexLeft]).addClass("visible");
+
+                currentImageIndexLeft = (currentImageIndexLeft + 1) % imagesLeft.length;
+            }
+
+            function showNextImageRight() {
+                imagesRight.removeClass("visible");
+                $(imagesRight[currentImageIndexRight]).addClass("visible");
+
+                currentImageIndexRight = (currentImageIndexRight + 1) % imagesRight.length;
+            }
+
+            setInterval(showNextImageLeft, 2000);
+            setInterval(showNextImageRight, 2000);
+        });
+    </script>
+</body>
+</html>

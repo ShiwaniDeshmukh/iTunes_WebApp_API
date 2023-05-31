@@ -8,43 +8,82 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/iTunes_WebApp_API.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        /* Transitions and Animations */
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #FF0000;
+        }
+
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-button {
+            display: none;
+        }
+
+        /* Custom Styles */
+        .navbar-brand {
+            font-size: 26px;
+            font-weight: bold;
+            margin-top: 1px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
-<body>
+<body style="font-family:'Times New Roman', Times, serif;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 sticky-nav">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">iTunes_WebApp_API</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-apple logo"></i> iTunes
+                </a>
+                <button class="navbar-toggler mobile-menu-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="iTunesStore" asp-action="Index">Store</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="container mb-5">
+        @RenderBody()
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - iTunes_WebApp_API - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer text-muted bg-light py-0">
+        <div>
+            <p style="color: black;">&copy; 2023 - iTunes_WebApp_API</p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

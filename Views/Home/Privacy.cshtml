@@ -1,6 +1,106 @@
 ﻿@{
+    Layout = "_Layout";
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - iTunes_WebApp_API</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/iTunes_WebApp_API.styles.css" asp-append-version="true" />
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        a {
+            color: #0070c9;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h1>Privacy Policy</h1>
+        </div>
+
+        <div class="content-container">
+            <h2>Introduction</h2>
+            <p>This privacy policy sets out how iTunes_WebApp_API uses and protects any information that you give iTunes_WebApp_API when you use this website.</p>
+
+            <h2>Information We Collect</h2>
+            <p>We may collect the following information:</p>
+            <ul>
+                <li>Information provided voluntarily by you, such as name and email address.</li>
+                <li>Information automatically collected when you browse our website, such as your IP address, browser type, and referring pages.</li>
+            </ul>
+
+            <h2>How We Use Cookies</h2>
+            <p>A cookie is a small file that asks permission to be placed on your computer's hard drive. By using cookies, we can analyze web traffic and improve our website. We only use this information for statistical analysis purposes, and then the data is removed from the system.</p>
+
+            <h2>Security</h2>
+            <p>We are committed to ensuring that your information is secure. In order to prevent unauthorized access or disclosure, we have implemented suitable physical, electronic, and managerial procedures to safeguard and secure the information we collect online.</p>
+
+            <h2>Links to Other Websites</h2>
+            <p>Our website may contain links to other websites of interest. However, once you have used these links to leave our site, you should note that we do not have any control over that other website. Therefore, we cannot be responsible for the protection and privacy of any information that you provide while visiting such sites.</p>
+
+            <h2>Controlling Your Personal Information</h2>
+            <p>You may choose to restrict the collection or use of your personal information by contacting us through the provided channels.</p>
+
+            <p>This privacy policy may change from time to time. Please check this page periodically to ensure that you are familiar with any updates or changes.</p>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

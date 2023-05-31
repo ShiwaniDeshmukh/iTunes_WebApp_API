@@ -53,6 +53,18 @@ namespace iTunes_WebApp_API
                 endpoints.MapControllerRoute(
                     name: "home",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "albums",
+                    pattern: "albums",
+                    defaults: new { controller = "Albums", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "albumDetails",
+                    pattern: "albums/{id}",
+                    defaults: new { controller = "Albums", action = "GetAlbumDetails" });
+
+                endpoints.MapControllers();
             });
 
 

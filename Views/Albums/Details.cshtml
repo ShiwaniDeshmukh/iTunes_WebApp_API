@@ -1,0 +1,29 @@
+﻿@model iTunes_WebApp_API.Models.AlbumDetails
+
+<h1>@Model.album</h1>
+<p>Artist: @Model.artist</p>
+<img src="@Model.artworkUrl100" alt="Album Artwork">
+
+<h2>Songs</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Artist Name</th>
+            <th>Track Name</th>
+            <th>Price</th>
+            <th>Release Date</th>
+            <th>Artwork</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var song in Model.Songs)
+        {
+            <tr>
+                <td>@song.trackName</td>
+                <td>@song.trackPrice</td>
+                <td>@song.releaseDate</td>
+                <td><img src="@song.artworkUrl100" alt="Song Artwork"></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -18,7 +18,7 @@ namespace iTunes_WebApp_API.Controllers
 
         public IActionResult Index()
         {
-            return View("Index");
+            return View(); // Remove the parameter "Index" to use the default view
         }
 
         public async Task<IActionResult> Search(string term)
@@ -54,16 +54,19 @@ namespace iTunes_WebApp_API.Controllers
                 // Deserialize the JSON response into a SearchResult object
                 SearchResult searchResult = JsonConvert.DeserializeObject<SearchResult>(json);
 
+                searchResult.Results = searchResult.Results ?? new List<SearchItem>();
+
+
                 // Generate the details URL for each search item
-                foreach (var item in searchResult.Results)
+                /*foreach (var item in searchResult.Results)
                 {
                     switch (item.Kind)
                     {
                         case "song":
-                            item.ViewDetailsUrl = Url.Action("Details", "Songs", new { id = item.TrackId });
+                            item.ViewDetailsUrl = Url.Action("Details", "Songs", new { id = item.trackId });
                             break;
                         case "album":
-                            item.ViewDetailsUrl = Url.Action("Details", "Albums", new { id = item.CollectionId });
+                            item.ViewDetailsUrl = Url.Action("Details", "Albums", new { id = item.albumId});
                             break;
                         case "music-video":
                             item.ViewDetailsUrl = Url.Action("Details", "MusicVideos", new { id = item.VideoId });
@@ -72,7 +75,7 @@ namespace iTunes_WebApp_API.Controllers
                             item.ViewDetailsUrl = Url.Action("Details", "TVEpisodes", new { id = item.EpisodeId });
                             break;
                     }
-                }
+                }*/
 
                 return View("Search", searchResult);
             }

@@ -14,6 +14,11 @@ namespace iTunes_WebApp_API.Models
         [JsonProperty("results")]
         public List<SearchItem> Results { get; set; }
 
+        public SearchResult()
+        {
+            Results = new List<SearchItem>();
+        }
+
         public static bool ValidateJsonStructure(string json)
         {
             try

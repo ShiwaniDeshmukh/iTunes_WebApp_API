@@ -6,6 +6,7 @@ namespace iTunes_WebApp_API.Models
 {
     public class Songs
     {
+        public int trackId { get; set; }
         public string wrapperType { get; set; }
         public string kind { get; set; }
         public string artistName { get; set; }
@@ -14,5 +15,6 @@ namespace iTunes_WebApp_API.Models
         public string artworkUrl100 { get; set; }
         public decimal? trackPrice { get; set; }
         public DateTime? releaseDate { get; set; }
+        public string ViewDetailsUrl { get; set; }
     }
 }

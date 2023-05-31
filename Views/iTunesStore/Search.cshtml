@@ -4,90 +4,218 @@
     ViewData["Title"] = "Search Results";
 }
 
-<h1>Search Results</h1>
-
-@if (Model.ResultCount > 0)
-{
-    <h2>Songs</h2>
-    <ul>
-        @foreach (var item in Model.Results)
-        {
-            if (item.WrapperType == "track" && item.Kind == "song")
-            {
-                <li>
-                    <a href="@item.ViewDetailsUrl">
-                        <img src="@item.ArtworkUrl100" alt="Album Artwork">
-                        <h3>@item.TrackName</h3>
-                        <p>Artist: @item.ArtistName</p>
-                        <p>Album: @item.CollectionName</p>
-                        <p>Price: @item.GetFormattedTrackPrice()</p>
-                        <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
-                    </a>
-                </li>
-            }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
         }
-    </ul>
 
-    <h2>Albums</h2>
-    <ul>
-        @foreach (var item in Model.Results)
-        {
-            if (item.WrapperType == "collection" && item.Kind == "album")
-            {
-                <li>
-                    <a href="@item.ViewDetailsUrl">
-                        <img src="@item.ArtworkUrl100" alt="Album Artwork">
-                        <h3>@item.CollectionName</h3>
-                        <p>Artist: @item.ArtistName</p>
-                        <p>Price: @item.GetFormattedCollectionPrice()</p>
-                        <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
-                    </a>
-                </li>
-            }
+        h1 {
+            color: black;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: -40px;
         }
-    </ul>
 
-    <h2>Music Videos</h2>
-    <ul>
-        @foreach (var item in Model.Results)
-        {
-            if (item.WrapperType == "track" && item.Kind == "song")
-            {
-                <li>
-                    <a href="@item.ViewDetailsUrl">
-                        <img src="@item.ArtworkUrl100" alt="Album Artwork">
-                        <h3>@item.TrackName</h3>
-                        <p>Artist: @item.ArtistName</p>
-                        <p>Album: @item.CollectionName</p>
-                        <p>Price: @item.GetFormattedTrackPrice()</p>
-                        <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
-                    </a>
-                </li>
-            }
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
         }
-    </ul>
 
-    <h2>TV Episodes</h2>
-    <ul>
-        @foreach (var item in Model.Results)
-        {
-            if (item.WrapperType == "track" && item.Kind == "song")
-            {
-                <li>
-                    <a href="@item.ViewDetailsUrl">
-                        <img src="@item.ArtworkUrl100" alt="Album Artwork">
-                        <h3>@item.TrackName</h3>
-                        <p>Artist: @item.ArtistName</p>
-                        <p>Album: @item.CollectionName</p>
-                        <p>Price: @item.GetFormattedTrackPrice()</p>
-                        <p>Released: @item.ReleaseDate?.ToString("MMMM d, yyyy")</p>
-                    </a>
-                </li>
-            }
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-    </ul>
-}
-else
-{
-    <p>No results found.</p>
-}
+
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .results-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .item-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+            flex-basis: 200px;
+        }
+
+            .item-container img {
+                width: 100%;
+                height: auto;
+                max-width: 200px;
+                max-height: 200px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            .item-container p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin: 0;
+                max-width: 200px;
+                text-align: center;
+            }
+
+            .item-container hr {
+                width: 80%;
+                margin-top: 10px;
+            }
+    </style>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    @if (Model.ResultCount > 0)
+    {
+        <div class="container">
+            <h2 style="margin-bottom: 20px">Songs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Track Name</th>
+                        <th>Artist</th>
+                        <th>Album</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Results)
+                    {
+                        if (item.WrapperType == "track" && item.Kind == "song")
+                        {
+                            <tr>
+                                <td><img src="@item.ArtworkUrl100" alt="Song Artwork"></td>
+                                <td>@item.TrackName</td>
+                                <td>@item.ArtistName</td>
+                                <td>@item.CollectionName</td>
+                                <td>@item.GetFormattedTrackPrice()</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h2 style="margin-bottom: 20px">Albums</h2>
+            @if (!Model.Results.Any(item => item.WrapperType == "collection" && item.Kind == "album"))
+            {
+                <p>No Albums found.</p>
+                <hr class="custom-line">
+            }
+            else
+            {
+                <div class="results-container">
+                    @foreach (var item in Model.Results)
+                    {
+                        if (item.WrapperType == "collection" && item.Kind == "album")
+                        {
+                            <div class="item-container">
+                                <img src="@item.ArtworkUrl100" alt="Album Artwork">
+                                <p style="font-weight: bold;">@item.TrackName </p>
+                                <p>@item.ArtistName</p>
+                                <p>@item.CollectionName</p>
+                                <p>@item.GetFormattedCollectionPrice()</p>
+                                <hr class="custom-line">
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="container">
+            <h2 style="margin-bottom: 20px">Music Videos</h2>
+            @if (!Model.Results.Any(item => item.WrapperType == "track" && item.Kind == "music-video"))
+            {
+                <p>No Music Videos found.</p>
+                <hr class="custom-line">
+            }
+            else
+            {
+                <div class="results-container">
+                    @foreach (var item in Model.Results)
+                    {
+                        if (item.WrapperType == "track" && item.Kind == "music-video")
+                        {
+                            <div class="item-container">
+                                <img src="@item.ArtworkUrl100" alt="Music Video Artwork">
+                                <p style="font-weight: bold;">@item.TrackName </p>
+                                <p>@item.ArtistName</p>
+                                <p>@item.GetFormattedTrackPrice()</p>
+                                <hr class="custom-line">
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="container">
+            <h2 style="margin-bottom: 20px">TV Episodes</h2>
+            @if (!Model.Results.Any(item => item.WrapperType == "track" && item.Kind == "tv-episode"))
+            {
+                <p>No TV Episodes found.</p>
+                <hr class="custom-line">
+            }
+            else
+            {
+                <div class="results-container">
+                    @foreach (var item in Model.Results)
+                    {
+                        if (item.WrapperType == "track" && item.Kind == "tv-episode")
+                        {
+                            <div class="item-container">
+                                <img src="@item.ArtworkUrl100" alt="TV Episode Artwork">
+                                <p style="font-weight: bold;">@item.TrackName </p>
+                                <p>@item.ArtistName</p>
+                                <p>@item.CollectionName</p>
+                                <p>@item.GetFormattedTrackPrice()</p>
+                                <hr class="custom-line">
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <p>No Results found.</p>
+        </div>
+    }
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

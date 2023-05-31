@@ -18,6 +18,12 @@ namespace iTunes_WebApp_API.Controllers
             return View("Index");
         }
 
+        // GET: Home/Privacy
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
         // GET: Home/GoToiTunesStore
         public IActionResult GoToiTunesStore()
         {
