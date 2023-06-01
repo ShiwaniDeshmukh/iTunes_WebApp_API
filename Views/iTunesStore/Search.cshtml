@@ -104,6 +104,7 @@
                         <th>Artist</th>
                         <th>Album</th>
                         <th>Price</th>
+                        <th>Click Count</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,10 +114,13 @@
                         {
                             <tr>
                                 <td><img src="@item.ArtworkUrl100" alt="Song Artwork"></td>
-                                <td>@item.TrackName</td>
+                                <td>
+                                    <a href="@item.ViewDetailsUrl" data-track-id="@item.trackId" class="track-link">@item.TrackName</a>
+                                </td>
                                 <td>@item.ArtistName</td>
                                 <td>@item.CollectionName</td>
                                 <td>@item.GetFormattedTrackPrice()</td>
+                                <td>@item.ClickCount</td>
                             </tr>
                         }
                     }
@@ -217,5 +221,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".track-link").click(function () {
+                var trackId = $(this).data("track-id");
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/IncrementClickCount",
+                    data: { trackId: trackId },
+                    success: function (result) {
+                        console.log("Click count incremented for trackId: " + trackId);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Error incrementing click count: " + error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using iTunes_WebApp_API.Models;
+using iTunes_WebApp_API.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -56,26 +58,20 @@ namespace iTunes_WebApp_API.Controllers
 
                 searchResult.Results = searchResult.Results ?? new List<SearchItem>();
 
-
-                // Generate the details URL for each search item
-                /*foreach (var item in searchResult.Results)
+                // Generate the details URL and retrieve the click count for each search item
+                foreach (var item in searchResult.Results)
                 {
                     switch (item.Kind)
                     {
                         case "song":
                             item.ViewDetailsUrl = Url.Action("Details", "Songs", new { id = item.trackId });
+                            item.ClickCount = ClickCountTracker.GetClickCount(item.trackId);
                             break;
-                        case "album":
-                            item.ViewDetailsUrl = Url.Action("Details", "Albums", new { id = item.albumId});
-                            break;
-                        case "music-video":
-                            item.ViewDetailsUrl = Url.Action("Details", "MusicVideos", new { id = item.VideoId });
-                            break;
-                        case "tv-episode":
-                            item.ViewDetailsUrl = Url.Action("Details", "TVEpisodes", new { id = item.EpisodeId });
+                        // Handle other types if needed
+                        default:
                             break;
                     }
-                }*/
+                }
 
                 return View("Search", searchResult);
             }

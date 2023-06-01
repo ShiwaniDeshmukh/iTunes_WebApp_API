@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace iTunes_WebApp_API.Models
 {
-    public class Songs
+    public class SongDetailsViewModel
     {
-        [Key]
-        public int Id { get; set; }
         public int trackId { get; set; }
         public string wrapperType { get; set; }
         public string kind { get; set; }
@@ -18,5 +14,6 @@ namespace iTunes_WebApp_API.Models
         public decimal? trackPrice { get; set; }
         public DateTime? releaseDate { get; set; }
         public string ViewDetailsUrl { get; set; }
+        public int ClickCount { get; set; }
     }
 }

@@ -1,42 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home";
+﻿@model iTunes_WebApp_API.Models.SearchResult
+
+<h1>Search Results</h1>
+
+@foreach (var item in Model.Results)
+{
+    <div>
+        <p>Track Name: <a href="@item.ViewDetailsUrl" data-track-id="@item.trackId" class="track-link">@item.TrackName</a></p>
+        <p>Artist: @item.ArtistName</p>
+        <p>Click Count: <span id="click-count-@item.trackId">@item.ClickCount</span></p>
+        <!-- Add other properties to display as needed -->
+    </div>
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] - iTunes</title>
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-right">
-                <img src="~/images/laptop.png" alt="Laptop Image" class="img-fluid laptop-image">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <img src="~/images/apple_logo.png" alt="Apple Logo" class="img-fluid apple-logo">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-left">
-                <h1 class="heading">Welcome to iTunes</h1>
-                <p class="subheading">Discover and purchase your favorite Music, Albums, and Music Videos.</p>
-            </div>
-        </div>
-        <div class="row justify-content-left">
-            <div class="col-md-6 text-left">
-                <a href="@Url.Action("Index", "iTunesStore")" class="btn btn-primary btn-lg btn-block btn-go-to-itunes">Go to iTunes Store</a>
-            </div>
-        </div>
-        <div class="row justify-content-left">
-            <div class="col-md-6 text-left">
-                <a href="@Url.Action("SignIn", "Authentication")" class="btn btn-primary btn-lg btn-block btn-sign-in">Sign in to iTunes Store</a>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.track-link').on('click', function (e) {
+                e.preventDefault();
+                var trackId = $(this).data('track-id');
+                var clickCountElement = $('#click-count-' + trackId);
+
+                $.ajax({
+                    url: '/Songs/TrackClick',
+                    type: 'POST',
+                    data: { trackId: trackId },
+                    success: function () {
+                        var clickCount = parseInt(clickCountElement.text()) + 1;
+                        clickCountElement.text(clickCount);
+                    }
+                });
+            });
+        });
+    </script>
+}

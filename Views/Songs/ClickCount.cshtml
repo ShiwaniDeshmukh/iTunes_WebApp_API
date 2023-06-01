@@ -1,0 +1,25 @@
+﻿@using iTunes_WebApp_API.Utilities
+
+@model iTunes_WebApp_API.Models.SongDetailsViewModel
+
+
+@{
+    Layout = null;
+
+    // Get the click count for the current song
+    int clickCount = ClickCountTracker.GetClickCount(Model.trackId);
+
+    // Increment the click count for the current song
+    ClickCountTracker.IncrementClickCount(Model.trackId);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click Count</title>
+</head>
+<body>
+    <h1>Click Count for Song: @Model.trackName</h1>
+    <p>Click Count: @clickCount</p>
+</body>
+</html>

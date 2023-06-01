@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -43,6 +44,14 @@ namespace iTunes_WebApp_API.Models
 
     public class SearchItem
     {
+        [JsonProperty("trackId")]
+        public int trackId { get; set; }
+
+        [JsonProperty("clickCount")]
+        public int ClickCount { get; set; }
+
+        public string ViewDetailsUrl { get; set; }
+
         [JsonProperty("wrapperType")]
         public string WrapperType { get; set; }
 
@@ -70,10 +79,6 @@ namespace iTunes_WebApp_API.Models
         [JsonProperty("releaseDate")]
         public DateTime? ReleaseDate { get; set; }
 
-        public string ViewDetailsUrl { get; set; }
-
-        // Additional properties for displaying the search results
-        public string Heading { get; set; }  // Heading for grouping results (e.g., Songs, Albums, etc.)
 
         // Additional methods for formatting and manipulating data
         public string GetFormattedTrackPrice()
