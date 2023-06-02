@@ -66,7 +66,7 @@ namespace iTunes_WebApp_API.Controllers
             // return episode;
 
             // In this example, assume a TVEpisode class is defined for holding the TV episode details
-            return new TVEpisodes { episodeId = id, trackName = "Episode Title", artistName = "Artist", collectionName = "Album", artworkUrl100 = "TV-Episode", trackPrice = (decimal?) 9.99};
+            return new TVEpisodes { episodeId = id, trackName = "Episode Title", artistName = "Artist", collectionName = "Album", artworkUrl100 = "TV-Episode", trackPrice = (decimal?)9.99 };
         }
     }
 }

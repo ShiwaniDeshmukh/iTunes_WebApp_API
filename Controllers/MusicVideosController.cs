@@ -67,7 +67,7 @@ namespace iTunes_WebApp_API.Controllers
             // return musicVideo;
 
             // In this example, assume a MusicVideo class is defined for holding the music video details
-            return new MusicVideos { videoId = id, trackName = "Music Video Title", collectionName = "Album", artistName = "Artist", artworkUrl100 = "Music Video", trackPrice = (decimal?) 9.99 };
-    }
+            return new MusicVideos { videoId = id, trackName = "Music Video Title", collectionName = "Album", artistName = "Artist", artworkUrl100 = "Music Video", trackPrice = (decimal?)9.99 };
+        }
     }
 }

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace iTunes_WebApp_API.Models
 {
-    public class Songs
+    public class MusicVideoDetailsViewModel
     {
-        public int trackId { get; set; }
+        [JsonProperty("trackId")] 
+        public int videoId { get; set; }
         public string wrapperType { get; set; }
         public string kind { get; set; }
         public string artistName { get; set; }
@@ -16,5 +16,6 @@ namespace iTunes_WebApp_API.Models
         public decimal? trackPrice { get; set; }
         public DateTime? releaseDate { get; set; }
         public string ViewDetailsUrl { get; set; }
+        public int ClickCount { get; set; }
     }
 }
