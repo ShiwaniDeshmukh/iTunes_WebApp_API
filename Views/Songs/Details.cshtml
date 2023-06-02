@@ -1,13 +1,96 @@
-﻿@model iTunes_WebApp_API.Models.SongDetailsViewModel
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        /* Set the background color to black */
+        body {
+            background-color: #000;
+        }
 
-<h1>Track Details</h1>
+        /* Styling for the track details container */
+        .track-details {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #444; /* Lighter gray background color */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease forwards;
+        }
 
-<div>
-    <h2>@Model.TrackName</h2>
-    <p>Artist: @Model.ArtistName</p>
-    <p>Collection: @Model.CollectionName</p>
-    <p>Release Date: @Model.ReleaseDate</p>
-    <p>Price: @Model.TrackPrice</p>
-    <p>Click Count: @Model.ClickCount</p>
-    <!-- Add more HTML to display other track details as needed -->
-</div>
+        /* Styling for the track details elements */
+        h1 {
+            font-size: 34px;
+            text-align: center;
+            color: #fff; /* White text color */
+            margin-bottom: 40px;
+            margin-top: 40px;
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: white;
+            margin-bottom: 5px;
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 30px;
+            margin-top: 23px;
+            font-weight: bold;
+        }
+
+        p {
+            color: whitesmoke;
+            margin: 5px 0;
+            font-size: 15px;
+
+        }
+
+        /* Additional styling for the image */
+        img {
+            width: 60%;
+            max-width: 300px;
+            display: block;
+            margin: 0 auto 20px;
+            animation: pulse 2s ease infinite;
+        }
+
+        /* Styling for the container */
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            /* Styling for the "Back to Search Results" button */
+            .container .btn {
+                margin-top: 40px;
+            }
+    </style>
+</head>
+
+<body>
+    <h1>Track Details</h1>
+
+    <div class="track-details">
+        <img src="@Model.ArtworkUrl100" alt="Song Artwork">
+        <h2>@Model.TrackName</h2>
+        <p>Artist: @Model.ArtistName</p>
+        <p>Album: @Model.CollectionName</p>
+        <p>Release Date: @Model.ReleaseDate</p>
+        <p>Price: @Model.TrackPrice</p>
+        <p>Click Count: @Model.ClickCount</p>
+    </div>
+
+    <div class="container">
+        <a class="btn btn-primary" href="@Url.Action("Search", "iTunesStore")">Back to iTunes Store</a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
