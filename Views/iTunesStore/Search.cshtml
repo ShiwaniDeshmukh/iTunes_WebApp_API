@@ -104,6 +104,7 @@
                         <th>Artist</th>
                         <th>Album</th>
                         <th>Price</th>
+                        <th>Click Count</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,10 +114,11 @@
                         {
                             <tr>
                                 <td><img src="@item.ArtworkUrl100" alt="Song Artwork"></td>
-                                <td>@item.TrackName</td>
+                                <td><a href="@item.ViewDetailsUrl">@item.TrackName</a></td>
                                 <td>@item.ArtistName</td>
                                 <td>@item.CollectionName</td>
                                 <td>@item.GetFormattedTrackPrice()</td>
+                                <td>@item.ClickCount</td>
                             </tr>
                         }
                     }
@@ -161,7 +163,7 @@
             }
             else
             {
-                <div class="results-container">
+                <div style="margin-bottom: 10px" class="results-container">
                     @foreach (var item in Model.Results)
                     {
                         if (item.WrapperType == "track" && item.Kind == "music-video")
@@ -180,7 +182,7 @@
         </div>
 
         <div class="container">
-            <h2 style="margin-bottom: 20px">TV Episodes</h2>
+            <h2>TV Episodes</h2>
             @if (!Model.Results.Any(item => item.WrapperType == "track" && item.Kind == "tv-episode"))
             {
                 <p>No TV Episodes found.</p>

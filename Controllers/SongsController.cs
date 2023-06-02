@@ -9,13 +9,20 @@ namespace iTunes_WebApp_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SongsController : ControllerBase
+    public class SongsController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;
 
         public SongsController(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
+        }
+
+        [HttpPost]
+        public IActionResult TrackClick(int trackId)
+        {
+            ClickCountTracker.IncrementClickCount(trackId);
+            return Ok();
         }
 
         [HttpGet]
@@ -32,7 +39,7 @@ namespace iTunes_WebApp_API.Controllers
                 // Generate the details URL for each search item
                 foreach (var song in songsResponse.Results)
                 {
-                    song.ViewDetailsUrl = Url.Action("Details", new { id = song.trackId });
+                    song.ViewDetailsUrl = Url.Action("Details", new { id = song.TrackId });
                 }
 
                 return Ok(songsResponse);
@@ -57,7 +64,23 @@ namespace iTunes_WebApp_API.Controllers
                 if (songsResponse?.Results?.Count > 0)
                 {
                     var song = songsResponse.Results[0];
-                    // return View(song);
+                    ClickCountTracker.IncrementClickCount(id);
+                    var songDetailsViewModel = new SongDetailsViewModel
+                    {
+                        TrackId = song.TrackId,
+                        WrapperType = song.WrapperType,
+                        Kind = song.Kind,
+                        ArtistName = song.ArtistName,
+                        CollectionName = song.CollectionName,
+                        TrackName = song.TrackName,
+                        ArtworkUrl100 = song.ArtworkUrl100,
+                        TrackPrice = song.TrackPrice,
+                        ReleaseDate = song.ReleaseDate,
+                        ViewDetailsUrl = song.ViewDetailsUrl,
+                        ClickCount = ClickCountTracker.GetClickCount(id)
+                    };
+
+                    return View(songDetailsViewModel);
                 }
             }
 

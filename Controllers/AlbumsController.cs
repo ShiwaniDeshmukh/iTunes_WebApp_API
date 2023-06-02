@@ -1,4 +1,4 @@
-﻿/*using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using iTunes_WebApp_API.Models;
@@ -9,7 +9,7 @@ namespace iTunes_WebApp_API.Controllers
 {
    [ApiController]
    [Route("[controller]")]
-   public class AlbumsController : ControllerBase
+   public class AlbumsController : Controller
    {
        private readonly IHttpClientFactory _clientFactory;
 
@@ -36,55 +36,30 @@ namespace iTunes_WebApp_API.Controllers
            }
        }
 
-       [HttpGet("{id}")]
-       public async Task<ActionResult<AlbumDetails>> Details(int id)
-       {
-           var httpClient = _clientFactory.CreateClient();
-           var response = await httpClient.GetAsync($"https://itunes.apple.com/lookup?id={id}&entity=song");
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Details(int id)
+        {
+            var httpClient = _clientFactory.CreateClient();
+            var response = await httpClient.GetAsync($"https://itunes.apple.com/lookup?id={id}&entity=album");
 
-           if (response.IsSuccessStatusCode)
-           {
-               var json = await response.Content.ReadAsStringAsync();
-               var songsResponse = JsonConvert.DeserializeObject<SongsResponse>(json);
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var albumResponse = JsonConvert.DeserializeObject<AlbumsResponse>(json);
 
-               if (songsResponse.Results.Count > 0)
-               {
-                   // Create an AlbumDetails object and populate it with the album information
-                   var albumDetails = new AlbumDetails
-                   {
-                       album = songsResponse.Results[0].collectionName,
-                       artist = songsResponse.Results[0].artistName,
-                       artworkUrl100 = songsResponse.Results[0].artworkUrl100,
-                       Songs = new List<Songs>()
-                   };
+                if (albumResponse?.Results?.Count > 0)
+                {
+                    var album = albumResponse.Results[0];
+                    return View(album);
+                }
+            }
 
-                   // Iterate over the songs and add them to the album's list of songs
-                   foreach (var song in songsResponse.Results)
-                   {
-                       albumDetails.Songs.Add(new Songs
-                       {
-                           trackName = song.trackName,
-                           trackPrice = song.trackPrice,
-                           releaseDate = song.releaseDate
-                       });
-                   }
+            return NotFound();
+        }
+    }
+}
 
-                   return Ok(albumDetails);
-               }
-               else
-               {
-                   return NotFound("No songs found for the specified album.");
-               }
-           }
-           else
-           {
-               return StatusCode((int)response.StatusCode);
-           }
-       }
-   }
-}*/
-
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using iTunes_WebApp_API.Models;
@@ -123,4 +98,4 @@ namespace iTunes_WebApp_API.Controllers
         }
 
     }
-}
+}*/

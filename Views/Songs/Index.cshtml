@@ -1,0 +1,9 @@
+﻿@foreach (var item in Model.Results)
+{
+    <div>
+        <p>Track Name: <a href="@item.ViewDetailsUrl" data-track-id="@item.trackId" class="track-link">@item.TrackName</a></p>
+        <p>Artist: @item.ArtistName</p>
+        <p>Click Count: <span id="click-count-@item.trackId">@item.ClickCount</span></p>
+        <!-- Other properties to display -->
+    </div>
+}

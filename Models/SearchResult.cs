@@ -72,6 +72,13 @@ namespace iTunes_WebApp_API.Models
 
         public string ViewDetailsUrl { get; set; }
 
+        [JsonProperty("clickCount")]
+        public int ClickCount { get; set; }
+
+        [JsonProperty("trackId")]
+        public int TrackId { get; set; }
+
+
         // Additional properties for displaying the search results
         public string Heading { get; set; }  // Heading for grouping results (e.g., Songs, Albums, etc.)
 

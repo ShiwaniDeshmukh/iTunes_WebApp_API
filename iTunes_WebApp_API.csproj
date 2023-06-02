@@ -15,19 +15,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Albums\ClickCount.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Albums\ClickCount.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Albums\" />
-    <Folder Include="Views\MusicVideos\" />
-    <Folder Include="Views\Songs\" />
-    <Folder Include="Views\TVEpisodes\" />
-  </ItemGroup>
-
 </Project>

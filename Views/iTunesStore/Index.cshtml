@@ -30,7 +30,7 @@
         .banner-container-right {
             position: absolute;
             width: 50%;
-            height: 600px;
+            height: 800px;
             overflow: hidden;
             top: 150px;
             z-index: 0;
@@ -49,7 +49,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 600px;
+            height: 800px;
             object-fit: cover;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
@@ -119,8 +119,8 @@
                 currentImageIndexRight = (currentImageIndexRight + 1) % imagesRight.length;
             }
 
-            setInterval(showNextImageLeft, 2000);
-            setInterval(showNextImageRight, 2000);
+            setInterval(showNextImageLeft, 1500);
+            setInterval(showNextImageRight, 1500);
         });
     </script>
 </body>
