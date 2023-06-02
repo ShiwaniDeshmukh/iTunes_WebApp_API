@@ -27,15 +27,14 @@ namespace iTunes_WebApp_API.Controllers
         // GET: Home/GoToiTunesStore
         public IActionResult GoToiTunesStore()
         {
-            return RedirectToAction("Index", "iTunesStore");
-        }
-
-
-
-        // GET: Home/SignIn
-        public IActionResult SignIn()
-        {
-            return RedirectToAction("SignIn", "Authentication");
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "iTunesStore");
+            }
+            else
+            {
+                return RedirectToAction("SignIn", "Authentication");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

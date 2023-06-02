@@ -5,11 +5,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using iTunes_WebApp_API.Models;
+using iTunes_WebApp_API.Models.ViewModels;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using iTunes_WebApp_API.Models.Repositories;
+
 
 namespace iTunes_WebApp_API
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -24,7 +30,17 @@ namespace iTunes_WebApp_API
             services.AddControllersWithViews();
             services.AddControllers();
             services.AddHttpClient();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "MyAppAuthCookie";
+                    options.LoginPath = "/Authentication/SignIn";
+                });
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -43,8 +59,18 @@ namespace iTunes_WebApp_API
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "signup",
+                    pattern: "Authentication/{action=SignUp}/{id?}",
+                    defaults: new { controller = "Authentication" });
+
+
                 endpoints.MapControllerRoute(
                     name: "itunes",
                     pattern: "iTunes/{action=Index}/{id?}",
@@ -52,6 +78,10 @@ namespace iTunes_WebApp_API
 
                 endpoints.MapControllerRoute(
                     name: "home",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllers();
